@@ -1,6 +1,6 @@
 
 #include "cluster.h"
-
+#include <iostream>
 namespace gp
 {
 
@@ -40,7 +40,6 @@ namespace gp
         void traverseDepthFirst(int i, int j,int k,
             const tensor_t & psi, real_t cutOff,Eigen::Tensor<int,DIMENSIONS+1> & decomposition, int color, int component)
         {
-
             const auto & dimensions = psi.dimensions();
 
             if (decomposition(i,j,k,component)!=0)
@@ -51,8 +50,10 @@ namespace gp
             {
                 auto density=psi(i,j,k,component).real() * psi(i,j,k,component).real() + psi(i,j,k,component).imag()*psi(i,j,k,component).imag();
 
+
                 if ( density > cutOff )
                 {
+                    
                     decomposition(i,j,k,component)=color;
                 }
                 else

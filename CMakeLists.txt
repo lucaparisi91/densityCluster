@@ -12,11 +12,8 @@ set(CMAKE_CXX_FLAGS "")
 set(CMAKE_CXX_FLAGS_DEBUG "")
 set(CMAKE_CXX_FLAGS_RELEASE "")
 
-
 include(init.cmake)
-
-#add_subdirectory(pybind11)
-
+add_subdirectory(pybind11)
 
 
 add_subdirectory(src)

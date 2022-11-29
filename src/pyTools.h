@@ -52,14 +52,13 @@ Eigen::Tensor< T , DIM > toTensor(const py::array_t<T> & x)
                     {
                         tensor(i,j,k,c)=xRaw(i,j,k,c);
                     }
-        return tensor;
     }
     else
     {
         throw std::runtime_error("Dimension not supported");
     }
 
-
+    return tensor;
 }
 
 

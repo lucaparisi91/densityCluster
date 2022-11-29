@@ -15,10 +15,10 @@ namespace pyInterface
     {
         public:
 
-        auto decompose( const py::array_t<complex_t> & pyPsi, real_t densityCutOff)
+        auto decompose( const py::array_t<real_t> & pyPsi, real_t densityCutOff)
         {
-            auto psi = toTensor<complex_t, DIMENSIONS + 1 >(pyPsi);
-            _decomposition = std::make_shared<Eigen::Tensor<int,DIMENSIONS+1> >( psi.dimensions() );
+            auto psi = toTensor<real_t, DIMENSIONS>(pyPsi);
+            _decomposition = std::make_shared<Eigen::Tensor<int,DIMENSIONS> >( psi.dimensions() );
 
             _decomposition->setConstant(0);
             gp::decompose::decompose(psi,densityCutOff,*_decomposition);
@@ -27,7 +27,7 @@ namespace pyInterface
 
         private:
 
-        std::shared_ptr<Eigen::Tensor<int,DIMENSIONS+1> > _decomposition;
+        std::shared_ptr<Eigen::Tensor<int,DIMENSIONS> > _decomposition;
 
     };
 

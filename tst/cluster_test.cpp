@@ -2,7 +2,7 @@
 #include "mpi.h"
 #include "../src/cluster.h"
 
-auto fillSquares( Eigen::Tensor<complex_t,DIMENSIONS+1> & data, std::array<int,DIMENSIONS> left,std::array<int,DIMENSIONS> right,int c=0)
+auto fillSquares( Eigen::Tensor<real_t,DIMENSIONS> & data, std::array<int,DIMENSIONS> left,std::array<int,DIMENSIONS> right)
 {
     for(int i=left[0]; i<=right[0];i++)
     {
@@ -10,14 +10,14 @@ auto fillSquares( Eigen::Tensor<complex_t,DIMENSIONS+1> & data, std::array<int,D
         {
             for(int k=left[2];k<=right[2];k++ )
             {
-                data(i,j,k,c)=1+0j;
+                data(i,j,k)=1;
             }
         }
     }
 }
 
 
-auto testColorSquares( Eigen::Tensor<int,DIMENSIONS+1> & data, std::array<int,DIMENSIONS> left,std::array<int,DIMENSIONS> right,int color, int c=0)
+auto testColorSquares( Eigen::Tensor<int,DIMENSIONS> & data, std::array<int,DIMENSIONS> left,std::array<int,DIMENSIONS> right,int color)
 {
     for(int i=left[0]; i<=right[0];i++)
     {
@@ -25,7 +25,7 @@ auto testColorSquares( Eigen::Tensor<int,DIMENSIONS+1> & data, std::array<int,DI
         {
             for(int k=left[2];k<=right[2];k++ )
             {
-                ASSERT_EQ(data(i,j,k,c) , color );
+                ASSERT_EQ(data(i,j,k) , color );
             }
         }
     }
@@ -34,8 +34,8 @@ auto testColorSquares( Eigen::Tensor<int,DIMENSIONS+1> & data, std::array<int,DI
 TEST(cluster,squares)
 {
 
-    Eigen::Tensor<complex_t,DIMENSIONS+1> data(100,100,100,1);
-    Eigen::Tensor<int,DIMENSIONS+1> decomposition(100,100,100,1);
+    Eigen::Tensor<real_t,DIMENSIONS> data(100,100,100);
+    Eigen::Tensor<int,DIMENSIONS> decomposition(100,100,100);
     data.setConstant(0);
     decomposition.setConstant(0);
 

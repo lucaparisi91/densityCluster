@@ -10,7 +10,7 @@ using real_t = double;
 
 using complex_t = std::complex<real_t>;
 using value_t = complex_t;
-using tensor_t = Eigen::Tensor<complex_t,DIMENSIONS + 1 > ;
+using tensor_t = Eigen::Tensor<real_t,DIMENSIONS> ;
 
 struct geometry;
 

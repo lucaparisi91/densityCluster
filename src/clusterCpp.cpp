@@ -11,6 +11,7 @@ namespace py = pybind11;
 
 namespace pyInterface
 {
+
     class decomposition
     {
         public:
@@ -19,7 +20,7 @@ namespace pyInterface
         {
             auto psi = toTensor<real_t, DIMENSIONS>(pyPsi);
             _decomposition = std::make_shared<Eigen::Tensor<int,DIMENSIONS> >( psi.dimensions() );
-
+            
             _decomposition->setConstant(0);
             gp::decompose::decompose(psi,densityCutOff,*_decomposition);
             return toArray(*_decomposition);
